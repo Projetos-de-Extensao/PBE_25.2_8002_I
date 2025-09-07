@@ -1,9 +1,17 @@
 # Projeto Back-End 
 
+Nome do Grupo:
+
+integrantes:
+
+-Keanu Santos Germano Pereira, 202503341664
+-Caio Domingues Azevedo, 202403191156
+-Ana Clara Henrique de Souza, 202503798451
+-João Pedro Rodrigues Bezamat,202501216109
 **Código da Disciplina**: IBM8936<br>
 
 ## Sobre 
-Descreva o seu projeto em linhas gerais. 
+Projeto de integração em back-end para a disciplina Projeto Back-End(PBE)
 
 ## Instalação 
 **Linguagens**: Python, Django<br>
