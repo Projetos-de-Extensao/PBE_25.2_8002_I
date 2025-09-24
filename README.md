@@ -3,10 +3,11 @@
 Nome do Grupo:
 
 integrantes:
+
 -Ana Clara Henrique de Souza, 202503798451<br>
 -Caio Domingues Azevedo, 202403191156<br>
--João Pedro Rodrigues Bezamat,202501216109<br><br>
--Keanu Santos Germano Pereira, 202503341664<br>
+-João Pedro Rodrigues Bezamat, 202501216109<br>
+-Keanu Santos Germano Pereira, 202503341664<br><br>
 **Código da Disciplina**: IBM8936<br>
 
 ## Sobre 
