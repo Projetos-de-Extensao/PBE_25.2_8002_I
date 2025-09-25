@@ -43,6 +43,9 @@ O sistema deve permitir que o usuário solicite a recuperação de senha por mei
 #### RN03 - Perfil de Acesso
 Usuários cadastrados devem ser atribuídos a perfis de acesso (coordenador, usuário comum, professor) conforme regras definidas pela organização, limitando funcionalidades disponíveis conforme o perfil.
 
+#### RN04 - Cadastro de projetos
+Projetos só podem ser inseridos na plataforma com todos os campos preenchidos.
+
 ## 6. Interfaces Externas
 Descreve integrações com outros sistemas, APIs, hardware ou bancos de dados.
 
