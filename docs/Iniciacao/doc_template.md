@@ -5,7 +5,7 @@ title: Modelo de Documento
 ## Introdução
 
 <p align = "justify">
-<!-- Escreva uma introdução simples e concisa, explicando do que se trata o documento e como ele será usado no projeto (qual o objetivo do documento). -->
+Documentação do projeto da matéria PBE-Projeto Back End 2025.2
 </p>
 
 ## Metodologia

@@ -58,12 +58,9 @@ markdown_extensions:
   - pymdownx.caret
   # Formatting
   - pymdownx.critic
-  # Admonitions
+  # Admonitions  pip install mkdocs-material
   - pymdownx.details
   # Icons & Emojis
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji ''
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg ''
   # Code Blocks
   - pymdownx.highlight:
       anchor_linenums: true
