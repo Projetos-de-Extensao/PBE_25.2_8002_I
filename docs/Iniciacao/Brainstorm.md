@@ -14,111 +14,76 @@ A equipe se reuniu para debater ideias gerais sobre o projeto via..., começou .
 </p>
  
 ## Brainstorm
- 
+ BRAINSTORM
+
+. Cadastro da Empresa (Usuário)
+
+O que pedir?
+
+Nome da empresa
+
+CNPJ (obrigatório)
+
+Email para contato
+
+Telefone (opcional)
+
+Senha de acesso
+
+Como validar?
+
+Validar o CNPJ para garantir que é uma empresa legítima
+
+Checkbox para concordar em ser contatado via email/telefone
+
+. Cadastro do Coordenador
+
+O que pedir?
+
+Nome completo
+
+Email
+
+Senha
+
+Tipo de usuário: Coordenador ou Professor
+
+AINDA ESTAMOS VALIDANDO:
+
+O coordenador pode adicionar professores, então precisa de um painel de controle
+
+. Cadastro de Projetos
+
+Campos obrigatórios:
+
+Nome do projeto
+
+Descrição do projeto
+
+Tecnologias necessárias
+
+. INTERAÇÃO DO COORDENADOR C/ PROJETO
+
+O coordenador pode aprovar ou editar o projeto
+
+Deve haver uma seção para feedback entre a empresa e o coordenador sobre o projet
+
+. VINCULAÇÃO DE PROFESSORES
+
+O coordenador escolhe quais professores serão responsáveis por cada projeto
+
+Professores terão acesso ao projeto e podem adicionar turmas ou grupos de alunos
+
+.NOTIFICAÇÕES
+
+Notificação por email quando:
+
+O projeto é aprovado ou modificado
+
+Um novo projeto é cadastrado
+
+O prazo de entrega do projeto está próximo
 ## Versão 1.0
- 
-## Perguntas
- 
-### 1. Qual o objetivo principal da aplicação?
- 
-<p align = "justify">
-<b>XXXX</b> - Deve ser uma plataforma onde qualquer pessoa possa...
-</p>
- 
-<b>ZZZ</b> - A plataforma deve fornece...
- 
-<b>YYYY</b> - O objetivo da aplicação é....
- 
-<b>WWWW</b> - O principal objetivo da aplicação é a...
- 
-<b>KKKK</b> - A plataforma deve gerenciar...
-</p>
- 
----
- 
-### 2. Como será o processo para cadastrar um novo cliente?
- 
-<p align = "justify">
-<b>XXXX</b> - O moderador deverá fazer login e...
- 
-<b>YYYY</b> - O cliente...
- 
-<b>WWWW</b> - Com o usuário logado, ele deverá...
-
-<b>ZZZZ</b> - O cliente...
- 
-<b>KKK</b> - O cliente...
- 
----
- 
-### 3. Como será a forma de adicionar produtos?
- 
-<p align = "justify">
-<b>XXXX</b> - O cliente ao cadastrar...
-</p>
- 
-<p align = "justify">
-<b>YYYYY</b> - O produto tem...
-</p>
- 
-<b>ZZZZ</b> - O produto....
- 
-<b>XXXX</b> - O produto....
-
- 
----
- 
-### 4. Outras perguntas pertinentes ao contexto
-
-<p align = "justify">
-<b>XXXX</b> - Com a localização...
- 
-<b>YYYY</b> - O cliente...
- 
-<b>ZZZ</b> - O cliente...
- 
----
- 
-### 5. "Outras perguntas pertinentes ao contexto", Como seria a forma de adicionar do cliente adicionar os produtos ?
-<p align = "justify">
-<b>XXX</b> - O cliente....
-</p>
- 
-### 6. Quais informações seriam interessante para o cliente?
-<p align = "justify">
-   <b>XXX</b> - Informações...
-   
-   <b>ZZZZ</b> - O cliente usuário poderá acessar informações...
-
-   <b>WWWWs</b> - O usuário poderá ver scouts de partidas do torneio, ver as regras dos torneios, locais e data das partidas.
-   
-</p>
- 
-### Requisitos elicitados
- 
-|ID|Descrição|
-|----|-------------|
-|BS01| O cliente...|
-|BS02| O cliente...|
-|BS03| O cliente...|
-|BS04| O cliente...|
-|BS05| O cliente...|
-|BS06| O cliente...|
-|BS07| O cliente...|
-|BS08| O cliente...|
-|BS09| O cliente...|
-|BS10| O produto...|
-|BS11| O produto...|
-|BS12| O produto...|
-|BS13| O produto...|
-|BS14| O produto...|
-|BS15| O produto...|
- 
-## Conclusão
-<p align = "justify">
-Através da aplicação da técnica, foi possível elicitar alguns dos primeiros requisitos do projeto.
-</p>
-## Referências Bibliográficas
  
 > BARBOSA, S. D. J; DA SILVA, B. S. Interação humano-computador. Elsevier, 2010.
  
