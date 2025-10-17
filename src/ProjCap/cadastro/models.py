@@ -2,6 +2,18 @@ from tokenize import String
 from django.db import models
 
 # Create your models here.
+class Proposta(models.Model):
+
+    titulo = models.CharField(max_length=100)
+    resumo = models.TextField()
+    objetivo = models.TextField()
+    publicoAlvo = models.TextField()
+    duracao = models.IntegerField()
+    recursosNecessarios = models.TextField()
+
+    def __str__(self):
+        return self.titulo
+
 class Projeto (models.Model):
 
     nome = models.CharField(max_length=100)
