@@ -1,62 +1,75 @@
 # Especificação de Requisitos
 
 ## 1. Introdução
-Registrar os requisitos de um sistema de Cadastro de Projetos
+Registrar os requisitos de um sistema de recebimento de propostas de projetos de extesão.
 
 ## 2. Visão Geral do Sistema
 Sistema para uso interno com o objetivo de receber propostas de projetos de clientes externos com a finalidade de usá-los como projetos de extensão para os alunos do IBMEC.
 
 ## 3. Requisitos Funcionais
 
-#### RF01 – O sistema deve permitir o cadastro entre dois perfil de usuário: Coordenador e cliente
-#### RF02 – O sistema deve permitir que o cliente faça o cadastro de projetos
-#### RF03 - O sistema deve exibir os projetos enviados, além de exibir status indicando se está em análise ou foi aprovado
-#### RF04 - O sistema deve permitir que coordenadores criem contas para professores
-#### RF05 - O sistema deve permitir que os professores criem grupos e alunos
-#### RF06 - O sistema deve permitir que coordenadores atribuam professores a projetos que foram aprovados
-#### RF07 - O sistema deve exibir projetos que já foram concluídos e informações sobre ele, como a tecnologia utilizada e o cliente
-#### RF08 - O sistema deve permitir que professores atribuam grupos aos projetos que ele possui
+- **RF01** – O sistema deve permitir o login e cadastro de usuários.
+- **RF02** – O sistema deve permitir que o cliente envie propostas de projetos de extensão.
+- **RF03** - O sistema deve exibir as propostas enviadas e status de andamento.
+- **RF04** - O sistema deve permitir que coordenadores criem contas para professores.
+- **RF05** - O sistema deve permitir que os professores anotem grupos responsáveis para cada um de seus projetos.
+- **RF06** - O sistema deve permitir que coordenadores relacionem professores a projetos.
+- **RF07** - O sistema deve exibir projetos concluídos e informações sobre ele, como a tecnologia utilizada e o cliente.
+- **RF08** - O sistema deve permitir que professores atribuam grupos aos projetos que ele possui.
+- **RF09** – O sistema deve permitir que coodenadores aceitem ou recusem propostas.
+
 
 ## 4. Requisitos Não Funcionais
 
-#### RNF01 – Segurança
-Cada usuário deve acessar somente funcionalidades que o seu perfil permite
+#### Segurança
+- Cada usuário deve acessar somente funcionalidades que o seu perfil permite
 
-#### RNF02 – Desempenho
-O envio de projetos deve ser realizado em menos de 5 segundos
+#### Desempenho
+- O envio de projetos deve ser realizado em menos de 5 segundos
 
-#### RNF03 – Usabilidade
-O sistema deve ser fácil de usar, mesmo sem treinamento
-Mensagens de erro e instruções devem ser claras
+#### Usabilidade
+- O sistema deve ser fácil de usar, mesmo sem treinamento
+- Mensagens de erro e instruções devem ser claras
 
-#### RNF04 – Manutenibilidade
-O sistema deve ser organizado de forma que futuras alterações possam ser feitas sem complicações.
+#### Manutenibilidade
+- O sistema deve ser organizado de forma que futuras alterações possam ser feitas sem complicações.
 
 ## 5. Regras de Negócio
 
-#### RN01 - Validação de Dados de Cadastro
-O sistema deve garantir que o e-mail informado pelo usuário seja único e válido, impedindo o cadastro de contas duplicadas ou com e-mails inválidos.
+### Login e Cadastro:
+- Apenas usuários registrados podem acessar a plataforma.
+- Sistemas de validação para email e contato devem ser implementados para garantir que apenas emails e contatos válidos sejam utilizados.
 
-#### RN02 - Recuperação de Senha
-O sistema deve permitir que o usuário solicite a recuperação de senha por meio do e-mail cadastrado, enviando um link seguro para redefinição da senha.
+### Perfis e Permissões de Usuário:
+- Clientes externos podem enviar, alterar e excluir propostas.
+- Coordenadores tem total acesso ao sistema, incluindo recusar e editar propostas, criar conta de professores, relacionar professores a projetos, gerenciar projetos (editar, excluir, tranformar novamente em proposta, marcar como concluido).
+- Professores anotam grupos de alunos a seus respectivos projetos.
 
-#### RN03 - Perfil de Acesso
-Usuários cadastrados devem ser atribuídos a perfis de acesso (coordenador, usuário comum, professor) conforme regras definidas pela organização, limitando funcionalidades disponíveis conforme o perfil.
+### Regras para Propostas:
+**Envio de propostas:**  
 
-#### RN04 - Cadastro de projetos
-Projetos só podem ser inseridos na plataforma com todos os campos preenchidos.
+- Somente propostas com todos os campos obrigatórios preenchidos poderão ser enviadas.
+- Cada cliente terá um limite de até 5 propostas por categoria para evitar excesso de propostas.
+- Cada proposta só podera fazer parte de uma categoria, sendo necessário reenvia-la em categorias diferentes conforme a necessidade.
 
-## 6. Interfaces Externas
-Descreve integrações com outros sistemas, APIs, hardware ou bancos de dados.
+**Gerenciamento de Propostas:**  
 
-## 7. Restrições
-Lista limitações técnicas, legais ou de negócio.
+- Coordenadores podem optar por inserir observações nas propostas antes de aceitá-las.
 
-## 8. Critérios de Aceitação
-Define condições para validação dos requisitos e aceitação do sistema.
+### Regras para Projetos:
+- Clientes poderão solicitar alteração de projetos aprovados.
+- Alterações em projetos só serão realizadas conforme permissão do Coordenador.
+- Projetos só poderão ser transformados em proposta com justificativa.
 
-## 9. Glossário
-Explica termos técnicos ou específicos do domínio.
+### Notificações e Feedback
 
-## 10. Referências
-Relaciona documentos, normas e materiais utilizados.
+**Notificações:**  
+
+- Sempre que uma proposta for aprovada o cliente deverá ser notificado.
+- Coordenadores deverão receber notificação automática para projetos que ainda não tem professores.
+- Coordenadores e professores (somente de seus projetos) deverão receber notificação de urgência para projetos cujo tempo de entrega esteja próximo e o status não esteja como concluído.
+- Clientes serão notificados sempre que um projeto seu for concluído.  
+
+**Feedback:**  
+
+- Clientes podem avaliar seus projetos concluídos com comentário
