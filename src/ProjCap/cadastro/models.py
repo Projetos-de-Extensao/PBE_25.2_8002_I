@@ -4,9 +4,6 @@ from django import forms
 
 # Create your models here.
 class Proposta(models.Model):
-    nomeSolucao = models.CharField("Nome da Solução", max_length=100)
-    objetivo = models.TextField()
-    tecnologias = models.TextField()
 
     expectativa_escolhas= [
     ('6 meses', '6 meses'),
@@ -14,26 +11,6 @@ class Proposta(models.Model):
     ('1 ano', '1 ano'),
     ('Não tenho expectativa', 'sem expectativa'),
     ]
-    expectativa = models.CharField(
-        max_length=21,
-        choices=expectativa_escolhas,
-        default='6 meses'
-    )
-    vinculo_escolhas= [
-    ('Aluno / Ex-aluno IBMEC', 'Aluno / Ex-aluno IBMEC'),
-    ('Faço / faço parte do IBMEC HUBS', 'Faço / faço parte do IBMEC HUBS'),
-    ('Índio não ter vínculo com IBMEC', 'Índio não ter vínculo com IBMEC')
-    ]
-    vinculoIbmec = models.CharField(
-        "Possui vínculo com o IBMEC?", 
-        max_length=100, 
-        default='Índio não ter vínculo com IBMEC', 
-        choices=vinculo_escolhas)
-
-    representante = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    telefone = models.CharField(max_length=20)
-    whatsapp = models.BooleanField("É whatsapp?", default=False)
 
     tipo_escolhas= [
     ('Front-End', 'Front-End'),
@@ -43,6 +20,7 @@ class Proposta(models.Model):
     ('Sistemas Embarcados', 'Sistemas Embarcados'),
     ('Cloud', 'Cloud')
     ]
+
     tipoSistema = models.CharField(
         "Tipo do Sistema",
         max_length=50,
@@ -50,9 +28,35 @@ class Proposta(models.Model):
         default='Front-End'
     )
 
+    vinculo_escolhas= [
+    ('Aluno / Ex-aluno IBMEC', 'Aluno / Ex-aluno IBMEC'),
+    ('Faço / faço parte do IBMEC HUBS', 'Faço / faço parte do IBMEC HUBS'),
+    ('Não tenho vínculo com o IBMEC', 'Não tenho vínculo com o IBMEC')
+    ]    
+    
+    nomeSolucao = models.CharField("Nome da Solução", max_length=100)
+    objetivo = models.TextField()
+    tecnologias = models.TextField()
+    # default vazio
+    representante = models.CharField(max_length=100, default='', blank=False)
+    email = models.EmailField(max_length=100, default='')
+    telefone = models.CharField(max_length=20, default='', blank=False)
+    whatsapp = models.BooleanField("É whatsapp?", default=False)
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, default=None)
+    expectativa = models.CharField(
+        max_length=21,
+        choices=expectativa_escolhas,
+        default='6 meses'
+    )
+    vinculoIbmec = models.CharField(
+        "Possui vínculo com o IBMEC?", 
+        max_length=100, 
+        default='Índio não ter vínculo com IBMEC', 
+        choices=vinculo_escolhas)
+
 
     def __str__(self):
-        return self.titulo
+        return self.nomeSolucao
 
 class Projeto (models.Model):
 
