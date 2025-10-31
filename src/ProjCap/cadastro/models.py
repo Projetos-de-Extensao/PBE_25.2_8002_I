@@ -1,8 +1,7 @@
 from tokenize import String
 from django.db import models
-from django import forms
+from phonenumber_field.modelfields import PhoneNumberField
 
-# Create your models here.
 class Proposta(models.Model):
 
     expectativa_escolhas= [
@@ -30,17 +29,27 @@ class Proposta(models.Model):
 
     vinculo_escolhas= [
     ('Aluno / Ex-aluno IBMEC', 'Aluno / Ex-aluno IBMEC'),
-    ('Faço / faço parte do IBMEC HUBS', 'Faço / faço parte do IBMEC HUBS'),
+    ('faço parte do IBMEC HUBS', 'faço parte do IBMEC HUBS'),
     ('Não tenho vínculo com o IBMEC', 'Não tenho vínculo com o IBMEC')
     ]    
+    status_proposta = [
+    ('Em análise', 'Em análise'),
+    ('Recusada', 'Recusada'),
+    ('Aprovada', 'Aprovada')
+    ]
     
-    nomeSolucao = models.CharField("Nome da Solução", max_length=100)
-    objetivo = models.TextField()
-    tecnologias = models.TextField()
-    # default vazio
+    nomeSolucao = models.CharField("Nome da Solução", max_length=100, blank=False)
+    objetivo = models.TextField(blank=False)
+    tecnologias = models.TextField(blank=False)
     representante = models.CharField(max_length=100, default='', blank=False)
-    email = models.EmailField(max_length=100, default='')
-    telefone = models.CharField(max_length=20, default='', blank=False)
+    email = models.EmailField(max_length=100, default='', blank=False)
+    telefone = PhoneNumberField(
+        max_length=15,
+        null=False,
+        blank=False,
+        region="BR",  # Define o país padrão (Brasil)
+        help_text="Número de telefone no formato internacional (ex: +5511987654321)"
+    )
     whatsapp = models.BooleanField("É whatsapp?", default=False)
     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, default=None)
     expectativa = models.CharField(
@@ -51,55 +60,75 @@ class Proposta(models.Model):
     vinculoIbmec = models.CharField(
         "Possui vínculo com o IBMEC?", 
         max_length=100, 
-        default='Índio não ter vínculo com IBMEC', 
+        default='Não tenho vínculo com o IBMEC', 
         choices=vinculo_escolhas)
-
+    situação = models.CharField(
+        max_length=20,
+        choices=status_proposta,
+        default='Em análise'
+    )
 
     def __str__(self):
         return self.nomeSolucao
 
 class Projeto (models.Model):
 
-    nome = models.CharField(max_length=100)
-    descricao = models.TextField()
-    status = models.CharField(max_length=50)
-    dataInicio = models.DateField()
-    dataFim = models.DateField()
+    status= [
+    ('Em andamento', 'Em andamento'),
+    ('Concluído', 'Concluído')
+    ]   
+    
+    nome = models.CharField(max_length=100, blank=False)
+    descricao = models.TextField(blank=False)
+    status = models.CharField(choices=status, max_length=50, blank=False, default='Em andamento')
+    dataInicio = models.DateField(blank=False)
+    dataFim = models.DateField(blank=False)
+    coordenador = models.ForeignKey('Coordenador', on_delete=models.CASCADE, default=None)
+    professor = models.ForeignKey('Professor', on_delete=models.CASCADE, default=None)
+    proposta = models.ForeignKey('Proposta', on_delete=models.CASCADE, default=None)
+
 
     def __str__(self):
         return self.nome
     
 class Coordenador (models.Model):
 
-    nome = models.CharField(max_length=100)
-    matricula = models.CharField(max_length=20)
-    email = models.EmailField(max_length=100)
-    telefone = models.CharField(max_length=20)
-    whatsapp = models.BooleanField(default=False)
+    nome = models.CharField(max_length=100, blank=False)
+    matricula = models.CharField(max_length=12, blank=False)
+    email = models.EmailField(max_length=100, blank=False)
+    telefone = PhoneNumberField(
+        default='',
+        blank=False,
+        region="BR",  # Define o país padrão (Brasil)
+        help_text="Número de telefone no formato internacional (ex: +5511987654321)"
+    )
 
     def __str__(self):
         return self.nome
     
 class Professor (models.Model):
 
-    nome = models.CharField(max_length=100)
-    matricula = models.CharField(max_length=20)
-    email = models.EmailField(max_length=100)
-    telefone = models.CharField(max_length=20)
-    whatsapp = models.BooleanField(default=False)
+    nome = models.CharField(max_length=100, blank=False)
+    matricula = models.CharField(max_length=12, blank=False)
+    email = models.EmailField(max_length=100, blank=False)
 
     def __str__(self):
         return self.nome
 
 class Empresa (models.Model):
 
-    nome = models.CharField(max_length=100)
-    cnpj = models.CharField(max_length=20)
-    endereco = models.CharField(max_length=200)
-    email = models.EmailField(max_length=100)
-    telefone = models.CharField(max_length=20)
-    whatsapp = models.BooleanField(default=False)
-    cargo = models.CharField(max_length=50)
+    nome = models.CharField("Nome da Empresa", max_length=100, blank=False)
+    cnpj = models.CharField("CNPJ", max_length=14, blank=False)
+    endereco = models.TextField("Endereço", blank=False)
+    email = models.EmailField("E-mail", max_length=100, blank=False)
+    telefone = PhoneNumberField(
+        "Telefone",
+        blank=False,
+        region="BR",  # Define o país padrão (Brasil)
+        help_text="Número de telefone no formato internacional (ex: +5511987654321)"
+    )
+    whatsapp = models.BooleanField("É whatsapp?", default=False)
+    observacoes = models.TextField("Observações", blank=False, default='Nenhuma')
 
     def __str__(self):
         return self.nome
