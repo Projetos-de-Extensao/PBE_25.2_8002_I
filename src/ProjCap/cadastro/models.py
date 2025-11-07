@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MinLengthValidator
+from cnpj_field.models import CNPJField
 
 class Proposta(models.Model):
 
@@ -44,10 +46,10 @@ class Proposta(models.Model):
     representante = models.CharField(max_length=100, default='', blank=False)
     email = models.EmailField(max_length=100, default='', blank=False)
     telefone = PhoneNumberField(
-        max_length=15,
-        null=False,
+        default='',
         blank=False,
-        region="BR",  # Define o país padrão (Brasil)
+        region="BR",
+        validators=[MinLengthValidator(8)],
         help_text="Número de telefone no formato internacional (ex: +5511987654321)"
     )
     whatsapp = models.BooleanField("É whatsapp?", default=False)
@@ -86,6 +88,7 @@ class Projeto (models.Model):
     coordenador = models.ForeignKey('Coordenador', on_delete=models.CASCADE, default=None)
     professor = models.ForeignKey('Professor', on_delete=models.CASCADE, default=None)
     proposta = models.ForeignKey('Proposta', on_delete=models.CASCADE, default=None)
+    grupoAlunos = models.TextField('Grupo de Alunos', blank=True)
 
 
     def __str__(self):
@@ -94,14 +97,18 @@ class Projeto (models.Model):
 class Coordenador (models.Model):
 
     nome = models.CharField(max_length=100, blank=False)
-    matricula = models.CharField(max_length=12, blank=False)
+    matricula = models.CharField(max_length=12, blank=False, validators=[MinLengthValidator(12)])
     email = models.EmailField(max_length=100, blank=False)
     telefone = PhoneNumberField(
         default='',
         blank=False,
-        region="BR",  # Define o país padrão (Brasil)
+        region="BR",
+        validators=[MinLengthValidator(8)],
         help_text="Número de telefone no formato internacional (ex: +5511987654321)"
     )
+    class Meta:
+        verbose_name = "Coordenador"              # Nome singular
+        verbose_name_plural = "Coordenadores"  
 
     def __str__(self):
         return self.nome
@@ -109,8 +116,11 @@ class Coordenador (models.Model):
 class Professor (models.Model):
 
     nome = models.CharField(max_length=100, blank=False)
-    matricula = models.CharField(max_length=12, blank=False)
+    matricula = models.CharField(max_length=12, blank=False, validators=[MinLengthValidator(12)])
     email = models.EmailField(max_length=100, blank=False)
+    class Meta:
+        verbose_name = "Professor"              # Nome singular
+        verbose_name_plural = "Professores"  
 
     def __str__(self):
         return self.nome
@@ -119,17 +129,19 @@ class Empresa (models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True,  # Adicione isso temporariamente
         blank=True, related_name='empresa')
     nome = models.CharField("Nome da Empresa", max_length=100, blank=False)
-    cnpj = models.CharField("CNPJ", max_length=14, blank=False)
+    cnpj = CNPJField("CNPJ", blank=False)
     endereco = models.TextField("Endereço", blank=False)
     email = models.EmailField("E-mail", max_length=100, blank=False)
     telefone = PhoneNumberField(
         "Telefone",
         blank=False,
         region="BR",  # Define o país padrão (Brasil)
-        help_text="Número de telefone no formato internacional (ex: +5511987654321)"
+        help_text="Número de telefone no formato internacional (ex: +5511987654321)",
+        validators=[MinLengthValidator(8)],
+        max_length=15,
     )
     whatsapp = models.BooleanField("É whatsapp?", default=False)
-    observacoes = models.TextField("Observações", blank=False, default='Nenhuma')
+    observacoes = models.TextField("Observações", blank=True)
 
     def __str__(self):
         return self.nome

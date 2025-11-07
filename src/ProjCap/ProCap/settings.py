@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'cadastro',
     'phonenumber_field',
-    'drf_yasg'
+    'drf_yasg',
+    'cnpj_field',
 ]
 
 REST_FRAMEWORK = {

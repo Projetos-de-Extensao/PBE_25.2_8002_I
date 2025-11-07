@@ -49,7 +49,6 @@ Sistema para uso interno com o objetivo de receber propostas de projetos de clie
 **Envio de propostas:**  
 
 - Somente propostas com todos os campos obrigatórios preenchidos poderão ser enviadas.
-- Cada cliente terá um limite de até 5 propostas por categoria para evitar excesso de propostas.
 - Cada proposta só podera fazer parte de uma categoria, sendo necessário reenvia-la em categorias diferentes conforme a necessidade.
 
 **Gerenciamento de Propostas:**  
