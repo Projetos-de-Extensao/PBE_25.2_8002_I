@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Status da Proposta - ProCap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .proposta-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .proposta-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .proposta-info p {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .empresa-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .status-atual {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .status-atual.em-analise {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-atual.aprovada {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-atual.recusada {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .status-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .status-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .status-option:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+
+        .status-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .status-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .status-option.em-analise {
+            border-color: #ffc107;
+        }
+
+        .status-option.aprovada {
+            border-color: #28a745;
+        }
+
+        .status-option.recusada {
+            border-color: #dc3545;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Alterar Status da Proposta</h1>
+        <a href="{% url 'dashboard_coordenador' %}">← Voltar ao Dashboard</a>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2>Detalhes da Proposta</h2>
+            
+            <div class="proposta-info">
+                <div class="empresa-badge">
+                    Empresa: {{ proposta.empresa.nome }}
+                </div>
+                
+                <h3>{{ proposta.nomeSolucao }}</h3>
+                
+                <p><strong>Tipo:</strong> {{ proposta.tipoSistema }}</p>
+                <p><strong>Objetivo:</strong> {{ proposta.objetivo }}</p>
+                <p><strong>Tecnologias:</strong> {{ proposta.tecnologias }}</p>
+                <p><strong>Representante:</strong> {{ proposta.representante }}</p>
+                <p><strong>Email:</strong> {{ proposta.email }}</p>
+                <p><strong>Telefone:</strong> {{ proposta.telefone }}</p>
+                <p><strong>Expectativa:</strong> {{ proposta.expectativa }}</p>
+                
+                <p style="margin-top: 15px;">
+                    <strong>Status Atual:</strong>
+                    <span class="status-atual {% if proposta.situação == 'Em análise' %}em-analise{% elif proposta.situação == 'Aprovada' %}aprovada{% else %}recusada{% endif %}">
+                        {{ proposta.situação }}
+                    </span>
+                </p>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label>Selecione o novo status:</label>
+                    
+                    <div class="status-options">
+                        <div class="status-option em-analise">
+                            <input 
+                                type="radio" 
+                                id="status_analise" 
+                                name="status" 
+                                value="Em análise"
+                                {% if proposta.situação == 'Em análise' %}checked{% endif %}
+                            >
+                            <label for="status_analise">
+                                Em Analise - A proposta esta sendo avaliada
+                            </label>
+                        </div>
+
+                        <div class="status-option aprovada">
+                            <input 
+                                type="radio" 
+                                id="status_aprovada" 
+                                name="status" 
+                                value="Aprovada"
+                                {% if proposta.situação == 'Aprovada' %}checked{% endif %}
+                            >
+                            <label for="status_aprovada">
+                                Aprovada - A proposta foi aceita e pode prosseguir
+                            </label>
+                        </div>
+
+                        <div class="status-option recusada">
+                            <input 
+                                type="radio" 
+                                id="status_recusada" 
+                                name="status" 
+                                value="Recusada"
+                                {% if proposta.situação == 'Recusada' %}checked{% endif %}
+                            >
+                            <label for="status_recusada">
+                                Recusada - A proposta foi rejeitada
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary">
+                        Salvar Alteração
+                    </button>
+                    <a href="{% url 'dashboard_coordenador' %}" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

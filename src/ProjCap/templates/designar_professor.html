@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designar Professor - ProCap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .navbar h1 { color: #333; font-size: 24px; }
+        .navbar a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .navbar a:hover { background: #f0f0f0; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        h2 { color: #333; margin-bottom: 30px; text-align: center; }
+        .proposta-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .proposta-info h3 { color: #667eea; margin-bottom: 15px; }
+        .proposta-info p {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .form-group select,
+        .form-group input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .form-group select:focus,
+        .form-group input[type="date"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+        }
+        .messages {
+            margin-bottom: 20px;
+        }
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .help-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Designar Professor</h1>
+        <a href="{% url 'dashboard_coordenador' %}">Voltar ao Dashboard</a>
+    </nav>
+
+    <div class="container">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <h2>Designar Professor para Proposta</h2>
+
+        <div class="proposta-info">
+            <h3>Proposta: {{ proposta.titulo }}</h3>
+            <p><strong>Empresa:</strong> {{ proposta.empresa.user.username }}</p>
+            <p><strong>Descrição:</strong> {{ proposta.descricao }}</p>
+            <p><strong>Objetivo:</strong> {{ proposta.objetivo }}</p>
+            <p><strong>Tecnologias:</strong> {{ proposta.tecnologias }}</p>
+            <p>
+                <strong>Status:</strong> 
+                <span class="status-badge">{{ proposta.situação }}</span>
+            </p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="professor">Selecione o Professor *</label>
+                <select name="professor_id" id="professor" required>
+                    <option value="">-- Escolha um professor --</option>
+                    {% for professor in professores %}
+                        <option value="{{ professor.id }}">
+                            {{ professor.nome }} - {{ professor.areaAtuacao }} (Matrícula: {{ professor.matricula }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <p class="help-text">Selecione o professor responsável por orientar este projeto</p>
+            </div>
+
+            <div class="form-group">
+                <label for="data_inicio">Data de Início *</label>
+                <input type="date" name="data_inicio" id="data_inicio" required>
+                <p class="help-text">Data prevista para início do projeto</p>
+            </div>
+
+            <div class="form-group">
+                <label for="data_fim">Data de Término *</label>
+                <input type="date" name="data_fim" id="data_fim" required>
+                <p class="help-text">Data prevista para conclusão do projeto</p>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">✓ Designar Professor</button>
+                <a href="{% url 'dashboard_coordenador' %}" class="btn btn-cancel">✗ Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Validação de datas
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const dataInicio = new Date(document.getElementById('data_inicio').value);
+            const dataFim = new Date(document.getElementById('data_fim').value);
+            
+            if (dataFim <= dataInicio) {
+                e.preventDefault();
+                alert('A data de término deve ser posterior à data de início!');
+            }
+        });
+
+        // Define data mínima como hoje
+        const hoje = new Date().toISOString().split('T')[0];
+        document.getElementById('data_inicio').min = hoje;
+        document.getElementById('data_fim').min = hoje;
+    </script>
+</body>
+</html>

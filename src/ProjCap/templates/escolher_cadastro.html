@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha o Tipo de Cadastro - ProCap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #4a5568;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #4a5568;
+        }
+
+        .card-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        .card h2 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #718096;
+        }
+
+        .login-link a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao ProCap</h1>
+        <p class="subtitle">Escolha o tipo de cadastro que voce deseja realizar</p>
+
+        <div class="cards-container">
+            <a href="{% url 'cadastro_empresa_form' %}" class="card">
+                <div class="card-icon">[E]</div>
+                <h2>Empresa</h2>
+                <p>Cadastre sua empresa e envie propostas de projetos</p>
+            </a>
+
+            <a href="{% url 'cadastro_professor' %}" class="card">
+                <div class="card-icon">[P]</div>
+                <h2>Professor</h2>
+                <p>Cadastre-se como professor e acompanhe projetos</p>
+            </a>
+
+            <a href="{% url 'cadastro_coordenador' %}" class="card">
+                <div class="card-icon">[C]</div>
+                <h2>Coordenador</h2>
+                <p>Cadastre-se como coordenador e gerencie projetos</p>
+            </a>
+        </div>
+
+        <div class="login-link">
+            Ja tem uma conta? <a href="{% url 'login' %}">Faca login aqui</a>
+        </div>
+    </div>
+</body>
+</html>

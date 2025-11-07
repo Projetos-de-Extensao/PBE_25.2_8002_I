@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
 class Proposta(models.Model):
@@ -50,7 +51,7 @@ class Proposta(models.Model):
         help_text="Número de telefone no formato internacional (ex: +5511987654321)"
     )
     whatsapp = models.BooleanField("É whatsapp?", default=False)
-    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, default=None)
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, default=None, related_name='propostas')
     expectativa = models.CharField(
         max_length=21,
         choices=expectativa_escolhas,
@@ -61,8 +62,7 @@ class Proposta(models.Model):
         max_length=100, 
         default='Não tenho vínculo com o IBMEC', 
         choices=vinculo_escolhas)
-    situacao = models.CharField(
-        "Situação",
+    situação = models.CharField(
         max_length=20,
         choices=status_proposta,
         default='Em análise'
@@ -78,11 +78,11 @@ class Projeto (models.Model):
     ('Concluído', 'Concluído')
     ]   
     
-    nome = models.CharField("Nome do Projeto", max_length=100, blank=False)
-    descricao = models.TextField("Descrição", blank=False)
+    nome = models.CharField(max_length=100, blank=False)
+    descricao = models.TextField(blank=False)
     status = models.CharField(choices=status, max_length=50, blank=False, default='Em andamento')
-    dataInicio = models.DateField("Data de Início", blank=False)
-    dataFim = models.DateField("Data Limite", blank=False)
+    dataInicio = models.DateField(blank=False)
+    dataFim = models.DateField(blank=False)
     coordenador = models.ForeignKey('Coordenador', on_delete=models.CASCADE, default=None)
     professor = models.ForeignKey('Professor', on_delete=models.CASCADE, default=None)
     proposta = models.ForeignKey('Proposta', on_delete=models.CASCADE, default=None)
@@ -92,6 +92,7 @@ class Projeto (models.Model):
         return self.nome
     
 class Coordenador (models.Model):
+
     nome = models.CharField(max_length=100, blank=False)
     matricula = models.CharField(max_length=12, blank=False)
     email = models.EmailField(max_length=100, blank=False)
@@ -102,10 +103,6 @@ class Coordenador (models.Model):
         help_text="Número de telefone no formato internacional (ex: +5511987654321)"
     )
 
-    class Meta:
-        verbose_name = "Coordenador"
-        verbose_name_plural = "Coordenadores"
-    
     def __str__(self):
         return self.nome
     
@@ -115,15 +112,12 @@ class Professor (models.Model):
     matricula = models.CharField(max_length=12, blank=False)
     email = models.EmailField(max_length=100, blank=False)
 
-    class Meta:
-        verbose_name = "Professor"
-        verbose_name_plural = "Professores"
-
     def __str__(self):
         return self.nome
 
 class Empresa (models.Model):
-
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True,  # Adicione isso temporariamente
+        blank=True, related_name='empresa')
     nome = models.CharField("Nome da Empresa", max_length=100, blank=False)
     cnpj = models.CharField("CNPJ", max_length=14, blank=False)
     endereco = models.TextField("Endereço", blank=False)
@@ -132,7 +126,7 @@ class Empresa (models.Model):
         "Telefone",
         blank=False,
         region="BR",  # Define o país padrão (Brasil)
-        help_text="Número de telefone no formato internacional (ex: +5511987654321)",
+        help_text="Número de telefone no formato internacional (ex: +5511987654321)"
     )
     whatsapp = models.BooleanField("É whatsapp?", default=False)
     observacoes = models.TextField("Observações", blank=False, default='Nenhuma')

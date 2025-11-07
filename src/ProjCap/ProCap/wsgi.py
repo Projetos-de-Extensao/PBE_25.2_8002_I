@@ -1,5 +1,5 @@
 """
-WSGI config for ProCap project.
+WSGI config for ProjCap project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

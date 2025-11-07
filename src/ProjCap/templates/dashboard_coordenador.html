@@ -1,0 +1,503 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Coordenador - ProCap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar h1 {
+            font-size: 24px;
+        }
+
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .user-name {
+            font-size: 14px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid white;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .welcome-card h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .welcome-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .proposta-item, .projeto-item {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: box-shadow 0.3s;
+        }
+
+        .proposta-item:hover, .projeto-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .proposta-item h3, .projeto-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .proposta-item p, .projeto-item p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status.em-analise {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status.aprovada {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.recusada {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.em-andamento {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status.concluido {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .badge.coordenador {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Estilos para as abas */
+        .tabs-container {
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 0;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            margin-bottom: -2px;
+        }
+
+        .tab-button:hover {
+            color: #667eea;
+            background: #f5f7fa;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+    <script>
+        function showTab(tabName) {
+            // Esconder todos os conteúdos de abas
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remover classe active de todos os botões
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Mostrar o conteúdo da aba selecionada
+            document.getElementById(tabName).classList.add('active');
+            
+            // Adicionar classe active ao botão clicado
+            event.target.classList.add('active');
+        }
+
+        // Ativar a primeira aba por padrão ao carregar a página
+        window.onload = function() {
+            document.querySelector('.tab-button').classList.add('active');
+            document.querySelector('.tab-content').classList.add('active');
+        };
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>👔 ProCap Dashboard - Coordenador</h1>
+        <div class="user-info">
+            <span class="user-name">{{ coordenador.nome }}</span>
+            <a href="{% url 'logout' %}">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="welcome-card">
+            <h2>Bem-vindo, Coord. {{ coordenador.nome }}! <span class="badge coordenador">COORDENADOR</span></h2>
+            <p>Gerencie propostas das empresas e atribua projetos aos professores.</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total de Propostas</h3>
+                <div class="number">{{ total_propostas }}</div>
+            </div>
+            <div class="stat-card">
+                <h3>Meus Projetos</h3>
+                <div class="number">{{ total_projetos }}</div>
+            </div>
+            <div class="stat-card">
+                <h3>Matrícula</h3>
+                <div class="number" style="font-size: 20px;">{{ coordenador.matricula }}</div>
+            </div>
+            <div class="stat-card">
+                <h3>Email</h3>
+                <div class="number" style="font-size: 16px;">{{ coordenador.email }}</div>
+            </div>
+        </div>
+
+        <!-- Sistema de Abas -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-button" onclick="showTab('propostas-tab')">
+                    Propostas ({{ total_propostas }})
+                </button>
+                <button class="tab-button" onclick="showTab('projetos-tab')">
+                    Projetos ({{ total_projetos }})
+                </button>
+            </div>
+
+            <!-- Conteúdo da Aba de Propostas -->
+            <div id="propostas-tab" class="tab-content">
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Propostas das Empresas</h2>
+                    </div>
+                    
+                    {% if propostas %}
+                        {% for proposta in propostas %}
+                        <div class="proposta-item">
+                            <h3>{{ proposta.nomeSolucao }}</h3>
+                            <p><strong>Empresa:</strong> {{ proposta.empresa.nome }}</p>
+                            <p><strong>Tipo:</strong> {{ proposta.tipoSistema }}</p>
+                            <p><strong>Objetivo:</strong> {{ proposta.objetivo|truncatewords:20 }}</p>
+                            <p><strong>Tecnologias:</strong> {{ proposta.tecnologias|truncatewords:10 }}</p>
+                            <p><strong>Representante:</strong> {{ proposta.representante }}</p>
+                            <p><strong>Email:</strong> {{ proposta.email }}</p>
+                            <p><strong>Expectativa:</strong> {{ proposta.expectativa }}</p>
+                            <p>
+                                <strong>Status:</strong> 
+                                <span class="status {% if proposta.situação == 'Em análise' %}em-analise{% elif proposta.situação == 'Aprovada' %}aprovada{% else %}recusada{% endif %}">
+                                    {{ proposta.situação }}
+                                </span>
+                            </p>
+                            
+                            <div class="actions">
+                                <a href="{% url 'alterar_status_proposta' proposta.id %}" class="btn btn-primary">
+                                    Alterar Status
+                                </a>
+                                {% if proposta.situação == 'Aprovada' %}
+                                <a href="{% url 'designar_professor' proposta.id %}" class="btn btn-success">
+                                    Designar Professor
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <p>Nenhuma proposta cadastrada ainda.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Conteúdo da Aba de Projetos -->
+            <div id="projetos-tab" class="tab-content">
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Meus Projetos Coordenados</h2>
+                    </div>
+                    
+                    {% if projetos %}
+                        {% for projeto in projetos %}
+                        <div class="projeto-item">
+                            <h3>{{ projeto.nome }}</h3>
+                            <p><strong>Descrição:</strong> {{ projeto.descricao|truncatewords:15 }}</p>
+                            <p><strong>Professor:</strong> {{ projeto.professor.nome }}</p>
+                            <p><strong>Data de Início:</strong> {{ projeto.dataInicio|date:"d/m/Y" }}</p>
+                            <p><strong>Data de Fim:</strong> {{ projeto.dataFim|date:"d/m/Y" }}</p>
+                            {% if projeto.proposta %}
+                            <p><strong>Empresa:</strong> {{ projeto.proposta.empresa.nome }}</p>
+                            {% endif %}
+                            <p>
+                                <strong>Status:</strong> 
+                                <span class="status {% if projeto.status == 'Em andamento' %}em-andamento{% else %}concluido{% endif %}">
+                                    {{ projeto.status }}
+                                </span>
+                            </p>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <p>Você ainda não tem projetos coordenados.</p>
+                            <p style="margin-top: 10px; font-size: 13px;">Aprove propostas e designe professores para criar projetos.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
