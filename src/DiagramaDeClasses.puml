@@ -1,0 +1,60 @@
+
+
+@startuml DiagramaDeClasses
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor #F5F5F5
+skinparam classBorderColor #888
+skinparam roundcorner 15
+skinparam shadowing false
+
+class Coordenador {
+- nome: String
+- matricula: String
+- email: String
+- telefone: String
+- whatsapp: Boolean
+}
+
+class Professor {
+- nome: String
+- matricula: String
+- email: String
+- telefone: String
+- whatsapp: Boolean
+}
+
+class Empresa {
+- nome: String
+- cnpj: String
+- endereco: String
+- email: String
+- telefone: String
+- whatsapp: Boolean
+- cargo: String
+}
+
+class Proposta {
+- titulo: String
+- resumo: String
+- objetivo: String
+- publicoAlvo: String
+- duracao: int
+- recursosNecessarios: String
+}
+
+class Projeto {
+- nome: String
+- descricao: String
+- status: String
+- dataInicio: Date
+- dataFim: Date
+}
+
+Coordenador "1" -- "0..n" Proposta : avalia/aprova >
+Proposta "1" --> "1" Projeto : gera (caso aprovada) >
+Professor "1" -- "0..n" Projeto : participa >
+Empresa "1" -- "0..n" Projeto : colabora >
+Coordenador "1" -- "0..n" Projeto : gerencia >
+Empresa "1" -- "0..n" Proposta : propõe >
+
+@enduml
