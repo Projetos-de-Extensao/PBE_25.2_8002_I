@@ -1,6 +1,6 @@
 # 🟦 Fase Inicial
 
-A fase inicial tem como objetivo **refinar requisitos, identificar riscos críticos e definir a arquitetura base** do projeto.
+A fase inicial tem como objetivo identificar requisitos funcionais e não funcionais, casos de uso, visualizar e definir o escopo do projeto.
 
 ---
 
