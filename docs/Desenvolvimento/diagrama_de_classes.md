@@ -8,7 +8,7 @@
 
 
 <br><br>
-### finais, pra ilustrar melhor o escopo do projeto:
+### finais, pra ilustrar melhor o escopo do projeto e ajudar na visualização:
 <br><br>
 
 ###3:

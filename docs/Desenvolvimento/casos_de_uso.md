@@ -3,7 +3,7 @@ id: diagrama_de_casos de uso
 title: Diagrama de Casos de Uso
 ---
 
-
+### Foram criados 2 casos de uso basicos pela equipe, para ilustrar as funções iniciais do sistema proposto:
 
 
 ### Criação de uma conta no sistema

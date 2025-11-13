@@ -18,6 +18,6 @@
 
 ---
 
-## 📦 Repositório  
+##  Repositório Github
 🔗 [https://github.com/Projetos-de-Extensao/PBE_25.2_8002_I](https://github.com/Projetos-de-Extensao/PBE_25.2_8002_I)
 

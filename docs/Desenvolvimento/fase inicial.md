@@ -7,7 +7,7 @@ A fase inicial tem como objetivo **refinar requisitos, identificar riscos críti
 ## 🎯 Objetivo da Fase
 
 - Refinar os requisitos essenciais  
-- Resolver riscos críticos  
+- visualização do projeto e objetivos 
 - Definir a arquitetura base  
 - Preparar o terreno para as próximas etapas do desenvolvimento
 
@@ -16,14 +16,14 @@ A fase inicial tem como objetivo **refinar requisitos, identificar riscos críti
 ## 📝 Principais Atividades
 
 ### ✔️ Detalhamento dos Requisitos
-Os requisitos mais importantes foram **clarificados e refinados** para garantir entendimento comum de toda a equipe.
+Os requisitos funcionais e não-funcionais foram inquiridos pelos membros da equipe.
 
 ---
 
-### 📐 Diagrama de Classes (Versão Inicial)
+###  Diagrama de Classes (Versão Inicial)
 Foi criado um **diagrama de classes inicial** para estruturar e compreender a modelagem do sistema.
 
-> **Obs.:** A versão inicial do diagrama foi substituída por uma mais adequada e alinhada ao escopo atualizado do projeto.
+> **Obs.:** foram feitos varios diagramas para se adaptar ao escopo atualizado do projeto e facilitar visualização
 
 ---
 
@@ -34,15 +34,3 @@ Também foi elaborado um **protótipo de baixa fidelidade**, utilizado para:
 - Validar expectativas com a equipe  
 - Ajudar na definição da interface e comportamento do sistema  
 
----
-
-## 📌 Resumo
-
-A Fase Inicial cumpriu seu papel ao:
-
-- Organizar e esclarecer os requisitos  
-- Propor uma modelagem inicial  
-- Identificar riscos críticos  
-- Construir protótipos para validação  
-
-Tudo isso permitiu dar andamento ao desenvolvimento com uma base sólida e definida.
