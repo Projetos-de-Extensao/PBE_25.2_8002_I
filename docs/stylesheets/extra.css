@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+html, body, .md-main, .md-content, .md-content__inner,
+.md-sidebar, .md-container {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+.md-typeset p,
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4,
+.md-typeset li, .md-typeset strong, .md-typeset em,
+.md-nav__link, .md-header, .md-footer {
+  color: #ffffff !important;
+}
+
+a, a:visited, .md-typeset a {
+  color: #8ab4f8 !important;
+}
+
+.md-header, .md-header__inner {
+  background-color: #0d0d0d !important;
+  color: #fff !important;
+}
+
+.md-footer {
+  background-color: #0d0d0d !important;
+  color: #ffffff !important;
+}
+
+.md-sidebar, .md-nav {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+.md-card,
+.md-typeset table,
+.admonition,
+.md-typeset blockquote {
+  background-color: #1e1e1e !important;
+  color: #fff !important;
+  border-color: #2a2a2a !important;
+}
+
+.md-card, .md-content, .md-sidebar {
+  box-shadow: none !important;
+}
+
+img {
+  filter: none !important;
+}
+
+
+body, .md-typeset, .md-nav, .md-header, .md-footer {
+  font-family: "Inter", sans-serif !important;
+}
+
+
+.md-nav__link {
+  color: #cfcfcf !important; 
+}
+
+.md-nav__link--active,
+.md-nav__item .md-nav__link--active {
+  color: #ffffff !important; 
+  font-weight: 600;
+}
+
+.md-nav__link:hover {
+  color: #ffffff !important;
+}
+
