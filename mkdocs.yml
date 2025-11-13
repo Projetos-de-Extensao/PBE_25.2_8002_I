@@ -21,7 +21,7 @@ nav:
       - Casos de Uso: Desenvolvimento/casos_de_uso.md
       - Diagrama de Classes: Desenvolvimento/diagrama_de_classes.md
       - Protótipo Baixa Fidelidade: Desenvolvimento/prototipo_baixa_fidelidade.md
-
+      - Código: Desenvolvimento/codigo.md
 markdown_extensions:
   - admonition
   - toc:
