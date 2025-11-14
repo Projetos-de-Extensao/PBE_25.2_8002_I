@@ -8,22 +8,28 @@
       
       
       
+        <link rel="canonical" href="https://sitedocs1.com.br/Desenvolvimento/casos_de_uso/">
       
       
+        <link rel="prev" href="../RF_RNF/">
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      
+        <link rel="next" href="../diagrama_de_classes/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>PBE 25.2, Documentação do projeto</title>
+        <title>Diagrama de Casos de Uso - PBE 25.2, Documentação do projeto</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -42,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="/stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -67,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#foram-criados-2-casos-de-uso-basicos-pela-equipe-para-ilustrar-as-funcoes-iniciais-do-sistema-proposto" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -79,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="PBE 25.2, Documentação do projeto" class="md-header__button md-logo" aria-label="PBE 25.2, Documentação do projeto" data-md-component="logo">
+    <a href="../.." title="PBE 25.2, Documentação do projeto" class="md-header__button md-logo" aria-label="PBE 25.2, Documentação do projeto" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -99,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Diagrama de Casos de Uso
             
           </span>
         </div>
@@ -189,7 +200,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="PBE 25.2, Documentação do projeto" class="md-nav__button md-logo" aria-label="PBE 25.2, Documentação do projeto" data-md-component="logo">
+    <a href="../.." title="PBE 25.2, Documentação do projeto" class="md-nav__button md-logo" aria-label="PBE 25.2, Documentação do projeto" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -219,7 +230,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -238,18 +249,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -265,7 +278,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Desenvolvimento
@@ -279,7 +292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Desenvolvimento/Brainstorm/" class="md-nav__link">
+      <a href="../Brainstorm/" class="md-nav__link">
         
   
   
@@ -302,7 +315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Desenvolvimento/mapa_mental/" class="md-nav__link">
+      <a href="../mapa_mental/" class="md-nav__link">
         
   
   
@@ -325,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Desenvolvimento/fase%20inicial/" class="md-nav__link">
+      <a href="../fase%20inicial/" class="md-nav__link">
         
   
   
@@ -348,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Desenvolvimento/RF_RNF/" class="md-nav__link">
+      <a href="../RF_RNF/" class="md-nav__link">
         
   
   
@@ -368,10 +381,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/Desenvolvimento/casos_de_uso/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Casos de Uso
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -382,6 +415,75 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#foram-criados-2-casos-de-uso-basicos-pela-equipe-para-ilustrar-as-funcoes-iniciais-do-sistema-proposto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Foram criados 2 casos de uso basicos pela equipe, para ilustrar as funções iniciais do sistema proposto:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criacao-de-uma-conta-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criação de uma conta no sistema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-de-usuario-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Login de usuário no sistema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-3a1-sistema-redireciona-o-usuario-para-a-pagina-de-edicao-de-perfil" class="md-nav__link">
+    <span class="md-ellipsis">
+      - 3a1. Sistema redireciona o Usuário para a página de edição de perfil
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="- 3a1. Sistema redireciona o Usuário para a página de edição de perfil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionamento-geral-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionamento geral do sistema:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -394,7 +496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Desenvolvimento/diagrama_de_classes/" class="md-nav__link">
+      <a href="../diagrama_de_classes/" class="md-nav__link">
         
   
   
@@ -417,7 +519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Desenvolvimento/prototipo_baixa_fidelidade/" class="md-nav__link">
+      <a href="../prototipo_baixa_fidelidade/" class="md-nav__link">
         
   
   
@@ -440,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/Desenvolvimento/codigo/" class="md-nav__link">
+      <a href="../codigo/" class="md-nav__link">
         
   
   
@@ -481,6 +583,65 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#foram-criados-2-casos-de-uso-basicos-pela-equipe-para-ilustrar-as-funcoes-iniciais-do-sistema-proposto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Foram criados 2 casos de uso basicos pela equipe, para ilustrar as funções iniciais do sistema proposto:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criacao-de-uma-conta-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criação de uma conta no sistema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-de-usuario-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Login de usuário no sistema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-3a1-sistema-redireciona-o-usuario-para-a-pagina-de-edicao-de-perfil" class="md-nav__link">
+    <span class="md-ellipsis">
+      - 3a1. Sistema redireciona o Usuário para a página de edição de perfil
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="- 3a1. Sistema redireciona o Usuário para a página de edição de perfil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionamento-geral-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionamento geral do sistema:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -491,8 +652,117 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+  <h1>Casos de Uso</h1>
+
+<h3 id="foram-criados-2-casos-de-uso-basicos-pela-equipe-para-ilustrar-as-funcoes-iniciais-do-sistema-proposto">Foram criados 2 casos de uso basicos pela equipe, para ilustrar as funções iniciais do sistema proposto:<a class="headerlink" href="#foram-criados-2-casos-de-uso-basicos-pela-equipe-para-ilustrar-as-funcoes-iniciais-do-sistema-proposto" title="Permanent link">&para;</a></h3>
+<h3 id="criacao-de-uma-conta-no-sistema">Criação de uma conta no sistema<a class="headerlink" href="#criacao-de-uma-conta-no-sistema" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Atores:</p>
+<ul>
+<li>Usuário</li>
+</ul>
+</li>
+<li>
+<p>Pré-Condições:</p>
+<ul>
+<li>Nenhuma</li>
+</ul>
+</li>
+<li>
+<p>Fluxo Básico:</p>
+<ol>
+<li>Usuário fornece e-mail, senha e confirmações</li>
+<li>Dados do Usuário são validados pelo Sistema</li>
+<li>Dados do Usuário são encriptados pelo Sistema</li>
+<li>Dados do Usuário são persistidos pelo Sistema</li>
+<li>Sistema gera um link com prazo de expiração</li>
+<li>Sistema envia e-mail de verificação, com o link, para o Usuário</li>
+<li>Usuário confirma o e-mail antes do link expirar</li>
+<li>Sistema confirma que o Cadastro do Usuário foi realizado com sucesso</li>
+</ol>
+</li>
+<li>
+<p>Fluxos Alternativos:</p>
+<ul>
+<li>2a. E-mail do Usuário é inválido
+    2a1. Sistema exibe mensagem de erro</li>
+<li>2b. Senha do Usuário não respeita regras de segurança<ul>
+<li>2b1. Sistema exibe mensagem de erro</li>
+</ul>
+</li>
+<li>3a. Usuário tenta confirmar o e-mail depois de o link expirar<ul>
+<li>3a1. Sistema sugere que o Usuário realize um novo Cadastro</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>caso de uso(criar conta): <img alt="Caso de Uso 2" src="../../assets/Casos_de_Uso/casos%20de%20uso%20criar%20conta.png" /></p>
+<h3 id="login-de-usuario-no-sistema">Login de usuário no sistema<a class="headerlink" href="#login-de-usuario-no-sistema" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Atores:</p>
+<ul>
+<li>Usuário</li>
+</ul>
+</li>
+<li>
+<p>Pré-Condições:</p>
+</li>
+<li>
+<p>Fluxo Básico:</p>
+<ul>
+<li>
+<ol>
+<li>Usuário fornece e-mail e senha</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Sistema autentica o Usuário</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Fluxos Alternativos:</p>
+<ul>
+<li>2a. Dados do Usuário Inválidos<ul>
+<li>2a1. Sistema exibe mensagem de erro</li>
+</ul>
+</li>
+<li>3a. Primeio acesso do Usuário<h2 id="-3a1-sistema-redireciona-o-usuario-para-a-pagina-de-edicao-de-perfil">- 3a1. Sistema redireciona o Usuário para a página de edição de perfil<a class="headerlink" href="#-3a1-sistema-redireciona-o-usuario-para-a-pagina-de-edicao-de-perfil" title="Permanent link">&para;</a></h2>
+<p>Caso de uso(login): <img alt="Caso de Uso 3 (login)" src="../../assets/Casos_de_Uso/casos%20de%20uso%203%28login%29.png" /></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="funcionamento-geral-do-sistema">Funcionamento geral do sistema:<a class="headerlink" href="#funcionamento-geral-do-sistema" title="Permanent link">&para;</a></h3>
+<p><img alt="sistema" src="../../assets/Casos_de_Uso/casosDeUso.png" /></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -528,10 +798,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>
