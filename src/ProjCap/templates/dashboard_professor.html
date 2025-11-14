@@ -216,6 +216,19 @@
             background-color: #e3f2fd;
             color: #1976d2;
         }
+
+        /* Layout de duas colunas para projetos */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -223,6 +236,7 @@
         <h1>ProCap Dashboard - Professor</h1>
         <div class="user-info">
             <span class="user-name">{{ professor.nome }}</span>
+            <a href="{% url 'editar_perfil' %}">Editar Perfil</a>
             <a href="{% url 'logout' %}">Sair</a>
         </div>
     </nav>
@@ -264,6 +278,7 @@
             </div>
             
             {% if projetos %}
+            <div class="items-grid">
                 {% for projeto in projetos %}
                 <div class="projeto-item">
                     <h3>{{ projeto.nome }}</h3>
@@ -282,6 +297,7 @@
                     </p>
                 </div>
                 {% endfor %}
+            </div>
             {% else %}
                 <div class="empty-state">
                     <p>Você ainda não tem projetos atribuídos.</p>

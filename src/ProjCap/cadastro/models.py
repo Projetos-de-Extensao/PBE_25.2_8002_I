@@ -119,7 +119,7 @@ class Professor (models.Model):
     matricula = models.CharField(max_length=12, blank=False, validators=[MinLengthValidator(12)])
     email = models.EmailField(max_length=100, blank=False)
     class Meta:
-        verbose_name = "Professor"              # Nome singular
+        verbose_name = "Professor"              
         verbose_name_plural = "Professores"  
 
     def __str__(self):
@@ -129,7 +129,7 @@ class Empresa (models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True,  # Adicione isso temporariamente
         blank=True, related_name='empresa')
     nome = models.CharField("Nome da Empresa", max_length=100, blank=False)
-    cnpj = CNPJField("CNPJ", blank=False)
+    cnpj = CNPJField("CNPJ", blank=False, max_length=18)
     endereco = models.TextField("Endereço", blank=False)
     email = models.EmailField("E-mail", max_length=100, blank=False)
     telefone = PhoneNumberField(

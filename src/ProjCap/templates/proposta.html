@@ -221,8 +221,18 @@
         {% endif %}
 
         <div class="form-card">
+            {% if editando %}
+            <h2>Editar Proposta</h2>
+            <p>Atualize as informações da sua proposta</p>
+            <div style="background-color: #fff3cd; padding: 12px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+                <p style="margin: 0; color: #856404; font-size: 14px;">
+                    ⚠️ Você pode editar esta proposta apenas enquanto estiver em análise.
+                </p>
+            </div>
+            {% else %}
             <h2>Criar Nova Proposta</h2>
             <p>Preencha os dados abaixo para enviar uma nova proposta de projeto</p>
+            {% endif %}
 
             <form method="POST">
                 {% csrf_token %}
@@ -371,10 +381,42 @@
                     {% endif %}
                 </div>
 
+                {% if editando %}
+                <button type="submit" class="btn-primary">💾 Salvar Alterações</button>
+                {% else %}
                 <button type="submit" class="btn-primary">Enviar Proposta</button>
+                {% endif %}
                 <a href="{% url 'dashboard' %}" class="btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
+
+    <script>
+        // Função para aplicar máscara de telefone ((00) 00000-0000)
+        function applyPhoneMask(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length <= 10) {
+                // Telefone fixo: (00) 0000-0000
+                value = value.replace(/^(\d{2})(\d)/, '($1) $2');
+                value = value.replace(/(\d{4})(\d)/, '$1-$2');
+            } else {
+                // Celular: (00) 00000-0000
+                value = value.replace(/^(\d{2})(\d)/, '($1) $2');
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            }
+            input.value = value.substring(0, 15);
+        }
+
+        // Aplicar máscaras aos campos quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Aplicar máscara de telefone
+            const phoneInput = document.querySelector('[data-mask="phone"]');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    applyPhoneMask(this);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

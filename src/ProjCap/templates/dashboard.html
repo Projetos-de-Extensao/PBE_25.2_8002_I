@@ -208,6 +208,23 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
+        .btn-editar-proposta {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-editar-proposta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -300,6 +317,19 @@
             background-color: #d1e7dd;
             color: #0f5132;
         }
+
+        /* Layout de duas colunas para propostas e projetos */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
     <script>
         function showTab(tabName) {
@@ -334,6 +364,7 @@
         <h1>ProCap Dashboard</h1>
         <div class="user-info">
             <span class="user-name">{{ empresa.nome }}</span>
+            <a href="{% url 'editar_perfil' %}">Editar Perfil</a>
             <a href="{% url 'logout' %}">Sair</a>
         </div>
     </nav>
@@ -393,6 +424,7 @@
                 </div>
                 
                 {% if propostas %}
+                <div class="items-grid">
                     {% for proposta in propostas %}
                     <div class="proposta-item">
                         <h3>{{ proposta.nomeSolucao }}</h3>
@@ -409,8 +441,16 @@
                                 {{ proposta.situação }}
                             </span>
                         </p>
+                        {% if proposta.situação == 'Em análise' %}
+                        <div style="margin-top: 15px;">
+                            <a href="{% url 'editar_proposta' proposta.id %}" class="btn-editar-proposta">
+                                ✏️ Editar Proposta
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                     {% endfor %}
+                </div>
                 {% else %}
                     <div class="empty-state">
                         <p>Você ainda não enviou nenhuma proposta.</p>
@@ -425,6 +465,7 @@
                 </div>
                 
                 {% if projetos %}
+                <div class="items-grid">
                     {% for projeto in projetos %}
                     <div class="projeto-item">
                         <h3>{{ projeto.nome }}</h3>
@@ -442,6 +483,7 @@
                         </p>
                     </div>
                     {% endfor %}
+                </div>
                 {% else %}
                     <div class="empty-state">
                         <p>Você ainda não possui projetos em andamento.</p>

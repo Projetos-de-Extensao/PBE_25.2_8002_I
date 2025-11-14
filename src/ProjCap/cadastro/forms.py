@@ -25,10 +25,10 @@ class EmpresaForm(forms.ModelForm):
         fields = ['nome', 'cnpj', 'endereco', 'email', 'telefone', 'whatsapp', 'observacoes']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome da Empresa'}),
-            'cnpj': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '00000000000000'}),
+            'cnpj': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '00.000.000/0000-00', 'data-mask': 'cnpj'}),
             'endereco': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Endereço completo'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email@empresa.com'}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+5511987654321'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '(00) 00000-0000', 'data-mask': 'phone'}),
             'whatsapp': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'observacoes': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Observações'}),
         }
@@ -105,7 +105,7 @@ class CoordenadorForm(forms.ModelForm):
             'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome completo'}),
             'matricula': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Matrícula'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email@coordenador.com'}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+5511987654321'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '(00) 00000-0000', 'data-mask': 'phone'}),
         }
         labels = {
             'nome': 'Nome Completo',
@@ -166,7 +166,8 @@ class PropostaForm(forms.ModelForm):
             }),
             'telefone': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '+5511987654321'
+                'placeholder': '(00) 00000-0000',
+                'data-mask': 'phone'
             }),
             'whatsapp': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'expectativa': forms.Select(attrs={'class': 'form-control'}),
@@ -183,4 +184,44 @@ class PropostaForm(forms.ModelForm):
             'whatsapp': 'Este número é WhatsApp?',
             'expectativa': 'Expectativa de Entrega',
             'vinculoIbmec': 'Vínculo com IBMEC'
+        }
+
+
+class EditarPerfilEmpresaForm(forms.ModelForm):
+    class Meta:
+        model = Empresa
+        fields = ['nome', 'telefone']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome da Empresa'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '(00) 00000-0000', 'data-mask': 'phone'}),
+        }
+        labels = {
+            'nome': 'Nome da Empresa',
+            'telefone': 'Telefone'
+        }
+
+
+class EditarPerfilProfessorForm(forms.ModelForm):
+    class Meta:
+        model = Professor
+        fields = ['nome']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome completo'}),
+        }
+        labels = {
+            'nome': 'Nome Completo'
+        }
+
+
+class EditarPerfilCoordenadorForm(forms.ModelForm):
+    class Meta:
+        model = Coordenador
+        fields = ['nome', 'telefone']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome completo'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '(00) 00000-0000', 'data-mask': 'phone'}),
+        }
+        labels = {
+            'nome': 'Nome Completo',
+            'telefone': 'Telefone'
         }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Empresa - ProCap</title>
+    <title>Editar Perfil - ProCap</title>
     <style>
         * {
             margin: 0;
@@ -31,7 +31,14 @@
         h1 {
             color: #333;
             text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
             margin-bottom: 30px;
+            font-size: 14px;
         }
 
         .messages {
@@ -82,21 +89,6 @@
             border-color: #667eea;
         }
 
-        textarea.form-control {
-            resize: vertical;
-        }
-
-        .form-check {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .form-check-input {
-            width: 20px;
-            height: 20px;
-        }
-
         .btn-primary {
             width: 100%;
             padding: 14px;
@@ -123,6 +115,11 @@
         .back-link a {
             color: #667eea;
             text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
         }
 
         .errorlist {
@@ -135,21 +132,57 @@
             color: #dc3545;
             font-size: 13px;
         }
+
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .user-type-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Cadastro de Empresa</h1>
+        <h1>
+            Editar Perfil
+            {% if user_type == 'empresa' %}
+                <span class="user-type-badge">Empresa</span>
+            {% elif user_type == 'professor' %}
+                <span class="user-type-badge">Professor</span>
+            {% elif user_type == 'coordenador' %}
+                <span class="user-type-badge">Coordenador</span>
+            {% endif %}
+        </h1>
+        <p class="subtitle">Atualize suas informações pessoais</p>
 
         {% if messages %}
         <div class="messages">
             {% for message in messages %}
-            <div class="message {{ message.tags }}">
-                {{ message }}
-            </div>
+            <div class="message {{ message.tags }}">{{ message }}</div>
             {% endfor %}
         </div>
         {% endif %}
+
+        <div class="info-box">
+            <p>📝 Você pode atualizar seu nome{% if user_type != 'professor' %} e telefone{% endif %} quando necessário.</p>
+        </div>
 
         <form method="POST">
             {% csrf_token %}
@@ -160,44 +193,33 @@
                 {{ field }}
                 {% if field.errors %}
                     <ul class="errorlist">
-                        {% for error in field.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
+                        {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
                     </ul>
-                {% endif %}
-                {% if field.help_text %}
-                    <small>{{ field.help_text }}</small>
                 {% endif %}
             </div>
             {% endfor %}
 
             {% if form.non_field_errors %}
                 <ul class="errorlist">
-                    {% for error in form.non_field_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
+                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
                 </ul>
             {% endif %}
 
-            <button type="submit" class="btn-primary">Cadastrar Empresa</button>
+            <button type="submit" class="btn-primary">💾 Salvar Alterações</button>
         </form>
 
         <div class="back-link">
-            <a href="{% url 'escolher_cadastro' %}">← Voltar para escolher tipo de cadastro</a>
+            {% if user_type == 'empresa' %}
+                <a href="{% url 'dashboard' %}">← Voltar ao Dashboard</a>
+            {% elif user_type == 'professor' %}
+                <a href="{% url 'dashboard_professor' %}">← Voltar ao Dashboard</a>
+            {% elif user_type == 'coordenador' %}
+                <a href="{% url 'dashboard_coordenador' %}">← Voltar ao Dashboard</a>
+            {% endif %}
         </div>
     </div>
 
     <script>
-        // Função para aplicar máscara de CNPJ (00.000.000/0000-00)
-        function applyCnpjMask(input) {
-            let value = input.value.replace(/\D/g, '');
-            value = value.replace(/^(\d{2})(\d)/, '$1.$2');
-            value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
-            value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
-            value = value.replace(/(\d{4})(\d)/, '$1-$2');
-            input.value = value.substring(0, 18);
-        }
-
         // Função para aplicar máscara de telefone ((00) 00000-0000)
         function applyPhoneMask(input) {
             let value = input.value.replace(/\D/g, '');
@@ -215,14 +237,6 @@
 
         // Aplicar máscaras aos campos quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
-            // Aplicar máscara de CNPJ
-            const cnpjInput = document.querySelector('[data-mask="cnpj"]');
-            if (cnpjInput) {
-                cnpjInput.addEventListener('input', function() {
-                    applyCnpjMask(this);
-                });
-            }
-
             // Aplicar máscara de telefone
             const phoneInput = document.querySelector('[data-mask="phone"]');
             if (phoneInput) {

@@ -9,7 +9,8 @@ from rest_framework import viewsets
 
 from .models import Proposta, Projeto, Coordenador, Professor, Empresa
 from .serializers import PropostaSerializer, ProjetoSerializer, CoordenadorSerializer, ProfessorSerializer, EmpresaSerializer
-from .forms import PropostaForm, EmpresaForm, ProfessorForm, CoordenadorForm
+from .forms import (PropostaForm, EmpresaForm, ProfessorForm, CoordenadorForm,
+                    EditarPerfilEmpresaForm, EditarPerfilProfessorForm, EditarPerfilCoordenadorForm)
 
 
 def escolher_tipo_cadastro(request):
@@ -387,4 +388,111 @@ class ProfessorViewSet(viewsets.ModelViewSet):
 class EmpresaViewSet(viewsets.ModelViewSet):
     queryset = Empresa.objects.all()
     serializer_class = EmpresaSerializer
+
+
+@login_required(login_url='login')
+def editar_proposta(request, proposta_id):
+    try:
+        empresa = request.user.empresa
+    except Empresa.DoesNotExist:
+        messages.error(request, 'Você precisa estar vinculado a uma empresa.')
+        return redirect('dashboard')
+    
+    try:
+        proposta = Proposta.objects.get(id=proposta_id, empresa=empresa)
+    except Proposta.DoesNotExist:
+        messages.error(request, 'Proposta não encontrada.')
+        return redirect('dashboard')
+    
+    # Apenas permite edição se estiver em análise
+    if proposta.situação != 'Em análise':
+        messages.error(request, 'Apenas propostas em análise podem ser editadas.')
+        return redirect('dashboard')
+    
+    if request.method == 'POST':
+        form = PropostaForm(request.POST, instance=proposta)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Proposta atualizada com sucesso!')
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Por favor, corrija os erros no formulário.')
+    else:
+        form = PropostaForm(instance=proposta)
+    
+    context = {
+        'form': form,
+        'empresa': empresa,
+        'proposta': proposta,
+        'editando': True
+    }
+    return render(request, 'proposta.html', context)
+
+
+@login_required(login_url='login')
+def editar_perfil(request):
+    # Determinar o tipo de usuário
+    user_type = None
+    user_obj = None
+    
+    try:
+        user_obj = request.user.empresa
+        user_type = 'empresa'
+    except Empresa.DoesNotExist:
+        pass
+    
+    if not user_type:
+        try:
+            user_obj = Professor.objects.get(matricula=request.user.username)
+            user_type = 'professor'
+        except Professor.DoesNotExist:
+            pass
+    
+    if not user_type:
+        try:
+            user_obj = Coordenador.objects.get(matricula=request.user.username)
+            user_type = 'coordenador'
+        except Coordenador.DoesNotExist:
+            pass
+    
+    if not user_type:
+        messages.error(request, 'Perfil de usuário não encontrado.')
+        return redirect('dashboard')
+    
+    # Selecionar o formulário apropriado
+    if request.method == 'POST':
+        if user_type == 'empresa':
+            form = EditarPerfilEmpresaForm(request.POST, instance=user_obj)
+        elif user_type == 'professor':
+            form = EditarPerfilProfessorForm(request.POST, instance=user_obj)
+        else:  # coordenador
+            form = EditarPerfilCoordenadorForm(request.POST, instance=user_obj)
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Perfil atualizado com sucesso!')
+            
+            # Redirecionar para o dashboard apropriado
+            if user_type == 'empresa':
+                return redirect('dashboard')
+            elif user_type == 'professor':
+                return redirect('dashboard_professor')
+            else:
+                return redirect('dashboard_coordenador')
+        else:
+            messages.error(request, 'Por favor, corrija os erros no formulário.')
+    else:
+        if user_type == 'empresa':
+            form = EditarPerfilEmpresaForm(instance=user_obj)
+        elif user_type == 'professor':
+            form = EditarPerfilProfessorForm(instance=user_obj)
+        else:  # coordenador
+            form = EditarPerfilCoordenadorForm(instance=user_obj)
+    
+    context = {
+        'form': form,
+        'user_type': user_type,
+        'user_obj': user_obj
+    }
+    return render(request, 'editar_perfil.html', context)
 
