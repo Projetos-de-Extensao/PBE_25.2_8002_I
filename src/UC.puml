@@ -1,0 +1,22 @@
+@startuml casosDeUso
+left to right direction
+
+actor Coordenador
+actor Professor
+actor Empresa
+
+rectangle "Sistema de captação de projetos" {
+
+Coordenador --> (Avaliar/Aprovar proposta)
+Coordenador --> (Criar projetos)
+Coordenador --> (Definir professor para projeto)
+
+Professor --> (Designar grupo de alunos para projeto)
+Professor --> (Colaborar com o projeto)
+
+Empresa --> (Enviar proposta)
+}
+
+
+
+@enduml

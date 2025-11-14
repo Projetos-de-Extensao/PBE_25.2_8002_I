@@ -56,5 +56,8 @@ caso de uso(criar conta): ![Caso de Uso 2](../assets/Casos_de_Uso/casos de uso c
 		- 
 Caso de uso(login): ![Caso de Uso 3 (login)](../assets/Casos_de_Uso/casos de uso 3(login).png)
 
+### Funcionamento geral do sistema:
+![sistema](../assets/Casos_de_Uso/casosDeUso.png)
+
 
 
